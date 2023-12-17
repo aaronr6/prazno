@@ -1,47 +1,34 @@
 import cv2 as cv
 import matplotlib.pyplot as plt 
-import numpy as np
+from round_rectangle import *
+from new_line import *
 from deepface import DeepFace
 
-img = cv.imread('moje_lice.jpg')
+img = cv.imread('borko copy.jpg')
 
 plt.imshow(img[:, :, : : -1])
 
-analysis = DeepFace.analyze(img_path = "moje_lice.jpg", actions = ['age', 'gender', 'race', 'emotion'])
+analysis = DeepFace.analyze(img_path = "borko copy.jpg", actions = ['age', 'gender', 'race', 'emotion'])
 analysis = analysis[0]
-print(analysis)
-print(analysis["age"], "years old", analysis["dominant_race"], " ", analysis["dominant_emotion"], " ", analysis["dominant_gender"])
+# print(analysis)
+# print(analysis["age"], "years old", analysis["dominant_race"], " ", analysis["dominant_emotion"], " ", analysis["dominant_gender"])
 
+parameters = analysis["region"]
+# print(parameters)
 
+draw_border(img, (parameters["x"],parameters["y"]), (parameters["x"]+parameters["w"], parameters["y"]+parameters["h"]), (226, 204, 120), 10, 10, 20)
 
-def draw_border(img, pt1, pt2, color, thickness, r, d):
-    x1,y1 = pt1
-    x2,y2 = pt2
+text = f'''AGE: {analysis["age"]}
+RACE: {analysis["dominant_race"]}
+EMOTION: {analysis["dominant_emotion"]}
+GENDER: {analysis["dominant_gender"]}'''
 
-    # Top left
-    cv2.line(img, (x1 + r, y1), (x1 + r + d, y1), color, thickness)
-    cv2.line(img, (x1, y1 + r), (x1, y1 + r + d), color, thickness)
-    cv2.ellipse(img, (x1 + r, y1 + r), (r, r), 180, 0, 90, color, thickness)
+font = cv.FONT_HERSHEY_SIMPLEX 
+position = (parameters["x"]+parameters["w"]+10, parameters["y"]) 
+font_scale = 1
+font_color = (102, 80, 0)
+line_thickness = 2
 
-    # Top right
-    cv2.line(img, (x2 - r, y1), (x2 - r - d, y1), color, thickness)
-    cv2.line(img, (x2, y1 + r), (x2, y1 + r + d), color, thickness)
-    cv2.ellipse(img, (x2 - r, y1 + r), (r, r), 270, 0, 90, color, thickness)
+add_text_to_image(img, text, position, font_scale, line_thickness, font, font_color)
 
-    # Bottom left
-    cv2.line(img, (x1 + r, y2), (x1 + r + d, y2), color, thickness)
-    cv2.line(img, (x1, y2 - r), (x1, y2 - r - d), color, thickness)
-    cv2.ellipse(img, (x1 + r, y2 - r), (r, r), 90, 0, 90, color, thickness)
-
-    # Bottom right
-    cv2.line(img, (x2 - r, y2), (x2 - r - d, y2), color, thickness)
-    cv2.line(img, (x2, y2 - r), (x2, y2 - r - d), color, thickness)
-    cv2.ellipse(img, (x2 - r, y2 - r), (r, r), 0, 0, 90, color, thickness)
-
-
-img = np.zeros((256,256,3), dtype=np.uint8)
-
-draw_border(img, (10,10), (100, 100), (127,255,255), 1, 10, 20)
-draw_border(img, (128,128), (240, 160), (255,255,127), 1, 5, 5)
-
-cv2.imwrite('round_rect.png', img)
+cv.imwrite('detected.png', img)
