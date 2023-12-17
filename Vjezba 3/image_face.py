@@ -4,11 +4,11 @@ from round_rectangle import *
 from new_line import *
 from deepface import DeepFace
 
-img = cv.imread('borko copy.jpg')
+img = cv.imread('aaron_2.jpg')
 
 plt.imshow(img[:, :, : : -1])
 
-analysis = DeepFace.analyze(img_path = "borko copy.jpg", actions = ['age', 'gender', 'race', 'emotion'])
+analysis = DeepFace.analyze(img, actions = ['age', 'gender', 'race', 'emotion'])
 analysis = analysis[0]
 # print(analysis)
 # print(analysis["age"], "years old", analysis["dominant_race"], " ", analysis["dominant_emotion"], " ", analysis["dominant_gender"])
@@ -16,7 +16,7 @@ analysis = analysis[0]
 parameters = analysis["region"]
 # print(parameters)
 
-draw_border(img, (parameters["x"],parameters["y"]), (parameters["x"]+parameters["w"], parameters["y"]+parameters["h"]), (226, 204, 120), 10, 10, 20)
+draw_border(img, (parameters["x"],parameters["y"]), (parameters["x"]+parameters["w"], parameters["y"]+parameters["h"]), (226, 204, 120), 5, 10, 20)
 
 text = f'''AGE: {analysis["age"]}
 RACE: {analysis["dominant_race"]}
