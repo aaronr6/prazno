@@ -1,3 +1,5 @@
-# Ovo je repozitorij koji je napravljen za vjezbanje gita!
+# Repozitorij za zadatke iz kolegija Kognitivna informatika
 
-> pokazujemo kako se koristi Markdown i kako da to onda updateamo na GitHUB!
+Kod koji je rješenje vježbe 3 nalazi se u direktoriji `Vjezba 3`.
+
+Potrebno je pokrenuti program `Vjezba_3.py`.
