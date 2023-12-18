@@ -6,7 +6,7 @@ from deepface import DeepFace
 
 def run_video():
 
-    face_cascade = cv.CascadeClassifier(cv.data.haarcascades + 'haarcascade_frontalface_default.xml')
+    face_cascade = cv.CascadeClassifier('haarcascade_frontalface_default.xml')
     cap = cv.VideoCapture(0)
 
     while True:

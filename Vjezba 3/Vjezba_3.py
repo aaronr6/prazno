@@ -5,27 +5,22 @@ from image_face import *
 
 def choose_image():
     run_image()
-    print("Image processing function")
+    # print("Image")
     messagebox.showinfo("Image Saved", "Your image is saved.")
 
-# Function to run when the user chooses a video
 def choose_video():
     run_video()
-    print("Video processing function")
+    # print("Video")
 
-# Create the main window
 root = tk.Tk()
 root.title("Choose Image or Video")
 
-# Set the window size (width x height)
-root.geometry("400x200")  # Set the dimensions as per your preference
+root.geometry("400x200")
 
-# Create buttons for choosing image and video
 image_button = tk.Button(root, text="Choose Image", command=choose_image)
 image_button.pack(side=tk.LEFT, padx=(20, 10), pady=20, expand=True, fill=tk.X)
 
 video_button = tk.Button(root, text="Choose Video", command=choose_video)
 video_button.pack(side=tk.LEFT, padx=(10, 20), pady=20, expand=True, fill=tk.X)
 
-# Run the main loop
 root.mainloop()
