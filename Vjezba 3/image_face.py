@@ -28,9 +28,9 @@ def run_image():
     draw_border(img, (parameters["x"],parameters["y"]), (parameters["x"]+parameters["w"], parameters["y"]+parameters["h"]), (226, 204, 120), 5, 10, 20)
 
     text = f'''AGE: {analysis["age"]}
-    RACE: {analysis["dominant_race"]}
-    EMOTION: {analysis["dominant_emotion"]}
-    GENDER: {analysis["dominant_gender"]}'''
+RACE: {analysis["dominant_race"]}
+EMOTION: {analysis["dominant_emotion"]}
+GENDER: {analysis["dominant_gender"]}'''
 
     check_text1 = f"EMOTION: {analysis['dominant_emotion']}"
     check_text2 = f"RACE: {analysis['dominant_race']}"
